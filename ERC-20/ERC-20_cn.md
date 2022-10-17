@@ -1,4 +1,4 @@
-# [EIP-20: 代币标准](https://eips.ethereum.org/EIPS/eip-20)
+# [EIP-20: 代币标准 （中译）](https://eips.ethereum.org/EIPS/eip-20)
 
 | 作者     | [Fabian Vogelsteller](mailto:fabian@ethereum.org), [Vitalik Buterin](mailto:vitalik.buterin@ethereum.org) |
 | -------- | ------------------------------------------------------------ |
@@ -9,24 +9,21 @@
 
 ## 目录
 
-- [Simple Summary](#simple-summary)
-- [Abstract](#abstract)
-- [Motivation](#motivation)
-- [Specification](#specification)
-- [Token](#Token)
-  - [Methods](#methods)
-  - [Events](#events)
-- [Implementation](#implementation)
-- [History](#history)
-- [Copyright](#copyright)
-
-[TOC]
-
+- [简要概括](#简要概括)
+- [摘要](#摘要)
+- [动机](#动机)
+- [规范](#规范)
+- [代币](#代币)
+  - [函数](#函数)
+  - [事件](#事件)
+- [实现](#实现)
+- [历史](#历史)
+- [版权](#版权)
 
 
 ##  简要概括
 
-<ruby>代币<rp>(</rp><rt>Token</rt><rp>)</rp></ruby>的一种标准接口。
+代币(Token)代币(Token)<ruby>代币<rp>(</rp><rt>Token</rt><rp>)</rp></ruby>的一种标准接口。
 
 ##  摘要
 
@@ -38,7 +35,7 @@
 
 ##  规范
 
-##  <ruby>代币<rp>(</rp><rt>Token</rt><rp>)</rp></ruby>
+##  代币
 
 ###  函数
 

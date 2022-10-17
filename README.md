@@ -65,18 +65,15 @@ EIP的提案来源于社区，绝大多数EIP提案并未被实际采用。对�
 ## 目录
 
 - [简要概括](#简要概括)
-- [Abstract](#abstract)
-- [Motivation](#motivation)
-- [Specification](#specification)
-- [Token](#Token)
-  - [Methods](#methods)
-  - [Events](#events)
-- [Implementation](#implementation)
-- [History](#history)
-- [Copyright](#copyright)
-
-[TOC]
-
+- [摘要](#摘要)
+- [动机](#动机)
+- [规范](#规范)
+- [代币](#代币)
+  - [函数](#函数)
+  - [事件](#事件)
+- [实现](#实现)
+- [历史](#历史)
+- [版权](#版权)
 
 
 ##  简要概括
@@ -93,7 +90,7 @@ EIP的提案来源于社区，绝大多数EIP提案并未被实际采用。对�
 
 ##  规范
 
-##  代币(Token)<ruby>代币<rp>(</rp><rt>Token</rt><rp>)</rp></ruby>
+##  代币
 
 ###  函数
 
