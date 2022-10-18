@@ -1,11 +1,11 @@
 # [EIP-20: 代币标准 （中译）](https://eips.ethereum.org/EIPS/eip-20)
 
-| 作者     | [Fabian Vogelsteller](mailto:fabian@ethereum.org), [Vitalik Buterin](mailto:vitalik.buterin@ethereum.org) |
-| -------- | ------------------------------------------------------------ |
-| 状态     | Final                                                        |
-| 类型     | Standards Track                                              |
-| 类别     | ERC                                                          |
-| 创建日期 | 2015-11-19                                                   |
+| 作者           | [Fabian Vogelsteller](mailto:fabian@ethereum.org), [Vitalik Buterin](mailto:vitalik.buterin@ethereum.org) |
+| -------------- | ------------------------------------------------------------ |
+| 状态           | Final                                                        |
+| 类型(Type)     | Standards Track                                              |
+| 类别(Category) | ERC                                                          |
+| 创建日期       | 2015-11-19                                                   |
 
 ## 目录
 
@@ -23,11 +23,11 @@
 
 ##  简要概括
 
-代币(Token)代币(Token)<ruby>代币<rp>(</rp><rt>Token</rt><rp>)</rp></ruby>的一种标准接口。
+<ruby>代币<rp>(</rp><rt>Token</rt><rp>)</rp></ruby>的一种标准接口。
 
 ##  摘要
 
-以下的标准涉及在智能合约中进行代币标准API的实现。此标准提供了转移代币的基本功能，并允许代币获得授权，以供链上第三方使用。
+以下标准涉及在智能合约中进行代币标准API的实现。此标准提供了转移代币的基本功能，并允许代币获得授权，以供链上第三方使用。
 
 ##  动机
 
@@ -42,13 +42,13 @@
 **注意**:
 
 - 以下规范使用Solidity `0.4.17` （及以上版本）的语法。
-- 调用者必须对`returns (bool success)`返回`false`进行处理。调用者不能假定`false`不会被返回。
+- 调用者【必须】对`returns (bool success)`返回`false`进行处理。调用者【不得】假定`false`不会被返回。
 
 ####  `name`函数（可选）
 
 返回代币的名称，例如：`MyToken`。
 
-*可选 - 此方法可用于提高可用性，但接口和其他合约不得认为这些值必然存在。*
+*可选 - 此方法可用于提高可用性，但接口和其他合约【不得】认为这些值必然存在。*
 
 ```solidity
 function name() public view returns (string)
@@ -58,7 +58,7 @@ function name() public view returns (string)
 
 返回代币名称的缩写，例如：`HIX`。
 
-*可选 - 此方法可用于提高可用性，但接口和其他合约不得认为这些值必然存在。*
+*【可选的】 - 此方法可用于提高可用性，但接口和其他合约【不得】认为这些值必然存在。*
 
 ```solidity
 function symbol() public view returns (string)
@@ -68,7 +68,7 @@ function symbol() public view returns (string)
 
 返回代币使用的小数位数，例如`8`，意味着要将代币金额除以`100000000` 来获得其在用户处的表示。
 
-*可选 - 此方法可用于提高可用性，但接口和其他合约不得认为这些值必然存在。*
+*【可选的 】- 此方法可用于提高可用性，但接口和其他合约【不得】认为这些值必然存在。*
 
 ```solidity
 function decimals() public view returns (uint8)
@@ -94,9 +94,9 @@ function balanceOf(address _owner) public view returns (uint256 balance)
 
 ####  transfer 函数
 
-转账，向地址`_to`转移`_value`数量的代币，并且必定触发`Transfer`事件。如果函数调用者的账户没有足够的余额，该函数会抛出异常（`throw`）。
+转账，向地址`_to`转移`_value`数量的代币，并且【必须】触发`Transfer`事件。如果函数调用者的账户没有足够的余额，该函数【应当】抛出异常（`throw`）。
 
-*注意*：数量为0的转账也应当被认为是正常的，并且触发`Transfer`事件。
+*注意*：数量为0的转账也【必须】被认为是正常的，并且触发`Transfer`事件。
 
 ```solidity
 function transfer(address _to, uint256 _value) public returns (bool success)
@@ -104,11 +104,11 @@ function transfer(address _to, uint256 _value) public returns (bool success)
 
 ####  transferFrom 函数
 
-从地址`_from`向地址`_to`转移`_value`数量的代币，并且必定触发`Transfer`事件。
+从地址`_from`向地址`_to`转移`_value`数量的代币，并且【必须】触发`Transfer`事件。
 
- `transferFrom`函数用于提款，允许合约以您的名义转移代币。例如，此函数可用于允许智能合约代表您转移代币，或者以子货币收取费用。此函数应当抛出异常（`throw`），除非账户`_from`已通过某些机制有意地向消息发送者授权不这样做。
+ `transferFrom`函数用于提款，允许合约以您的名义转移代币。例如，此函数可用于允许智能合约代表您转移代币，或者以子货币收取费用。此函数【应当】抛出异常（`throw`），除非账户`_from`已通过某些机制有意地向消息发送者授权不这样做。
 
-*注意*：数量为0的转账也应当被认为是正常的，并且触发`Transfer`事件。
+*注意*：数量为0的转账也【必须】被认为是正常的，并且触发`Transfer`事件。
 
 ```solidity
 function transferFrom(address _from, address _to, uint256 _value) public returns (bool success)
@@ -118,7 +118,7 @@ function transferFrom(address _from, address _to, uint256 _value) public returns
 
 允许`_spender`从您的帐户中多次提款，最高额度为`_value`。 如果重新调用此函数，它会用新的`_value`覆盖当前额度。
 
-**注意**：为防止如[这篇文章](https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM/)所描述的攻击向量（对攻击向量的讨论见[这里](https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729)），客户端应当确保以这样一种方式来创建用户界面：即对于同一个消费者，首先将额度设置为`0`，然后再设置为其他值。尽管如此，合约本身不应当对其作出强制，以实现对以往部署的合约的后向兼容。
+**注意**：为防止如[这篇文章](https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM/)所描述的攻击向量（对攻击向量的讨论见[这里](https://github.com/ethereum/EIPs/issues/20#issuecomment-263524729)），客户端【应当】确保以这样一种方式来创建用户界面：即对于同一个消费者，首先将额度设置为`0`，然后再设置为其他值。尽管如此，合约本身不应当对其作出强制，以实现对以往部署的合约的后向兼容。
 
 ```solidity
 function approve(address _spender, uint256 _value) public returns (bool success)
@@ -140,9 +140,9 @@ function allowance(address _owner, address _spender) public view returns (uint25
 
 ####  Transfer 事件
 
-一旦出现代币转账，包括数额为0的转账在内，必然触发`Transfer`事件.
+一旦出现代币转账，包括数额为0的转账在内，【必须】触发`Transfer`事件.
 
-创建新代币的代币合约应当在创建代币时触发一个将 `_from` 地址设置为 `0x0` 的 `Transfer` 事件。
+创建新代币的代币合约【应当】在创建代币时触发一个将 `_from` 地址设置为 `0x0` 的 `Transfer` 事件。
 
 ```solidity
 event Transfer(address indexed _from, address indexed _to, uint256 _value)
@@ -152,7 +152,7 @@ event Transfer(address indexed _from, address indexed _to, uint256 _value)
 
 ####  Approval 事件
 
-所有对`approve(address _spender, uint256 _value)`函数的成功调用，都必然触发`Approve`事件
+所有对`approve(address _spender, uint256 _value)`函数的成功调用，都【必须】触发`Approve`事件
 
 ```solidity
 event Approval(address indexed _owner, address indexed _spender, uint256 _value)
@@ -187,3 +187,4 @@ event Approval(address indexed _owner, address indexed _spender, uint256 _value)
 
 [Fabian Vogelsteller](mailto:fabian@ethereum.org), [Vitalik Buterin](mailto:vitalik.buterin@ethereum.org), "EIP-20: Token Standard," *Ethereum Improvement Proposals*, no. 20, November 2015. [Online serial]. Available: https://eips.ethereum.org/EIPS/eip-20.
 
+> 依照[EIP-1对关键词规范的建议](https://eips.ethereum.org/EIPS/eip-1#rfc-2119-and-rfc-8174)，本文档中的关键词【必须】（MUST），【不得】（MUST NOT），【必要的】（REQUIRED），【要求】（SHALL），【要求不】（SHALL NOT），【应当】（SHOULD），【不应】（SHOULD NOT），【推荐的】（RECOMMENDED），【不推荐的】（NOT RECOMMENDED），【可以】（MAY），和【可选的】（OPTIONAL）按照[RFC2119](https://www.rfc-editor.org/rfc/rfc2119)和[RFC 8174](https://www.rfc-editor.org/rfc/rfc8174)中的说明进行解释。
